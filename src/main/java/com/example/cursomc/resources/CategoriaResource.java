@@ -24,6 +24,10 @@ public class CategoriaResource {
 
         Categoria categoria = categoriaService.buscar(id);
 
+        if (categoria == null) {
+            return ResponseEntity.noContent().build();
+        }
+
         return ResponseEntity.ok().body(categoria);
     }
 
