@@ -3,6 +3,7 @@ package com.example.cursomc.resources;
 import com.example.cursomc.domain.Categoria;
 import com.example.cursomc.dto.CategoriaDto;
 import com.example.cursomc.services.CategoriaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +41,8 @@ public class CategoriaResource {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity<Void> insert(@RequestBody Categoria obj) {
+    public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDto dto) {
+        Categoria obj = categoriaService.fromDto(dto);
         obj = categoriaService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
