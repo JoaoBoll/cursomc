@@ -2,6 +2,7 @@ package com.example.cursomc.resources;
 
 import com.example.cursomc.domain.Cliente;
 import com.example.cursomc.dto.ClienteDto;
+import com.example.cursomc.dto.ClienteNewDto;
 import com.example.cursomc.services.ClienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class ClienteResource {
 
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDto dto) {
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDto dto) {
         Cliente obj = clienteService.fromDto(dto);
         obj = clienteService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
