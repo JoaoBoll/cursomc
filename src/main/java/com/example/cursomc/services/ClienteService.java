@@ -41,7 +41,8 @@ public class ClienteService {
     public Cliente update(Cliente obj) {
         Cliente newObj = find(obj.getId());
         updateData(newObj, obj);
-        return clienteRepository.save(newObj);    }
+        return clienteRepository.save(newObj);
+    }
 
     private void updateData(Cliente newObj, Cliente obj) {
         newObj.setNome(obj.getNome());
