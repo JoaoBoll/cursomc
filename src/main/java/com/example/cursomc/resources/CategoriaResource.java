@@ -1,6 +1,7 @@
 package com.example.cursomc.resources;
 
 import com.example.cursomc.domain.Categoria;
+import com.example.cursomc.dto.CategoriaDto;
 import com.example.cursomc.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/categorias")
@@ -19,7 +21,8 @@ public class CategoriaResource {
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public ResponseEntity<?> findAll() {
-        List<Categoria> categorias = categoriaService.findAll();
+        List<Categoria> list = categoriaService.findAll();
+        List<CategoriaDto> categorias = list.stream().map(e -> new CategoriaDto(e)).collect(Collectors.toList());
         if (categorias == null) {
             return ResponseEntity.noContent().build();
         }
