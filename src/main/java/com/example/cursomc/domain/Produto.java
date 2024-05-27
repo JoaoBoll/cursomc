@@ -1,5 +1,6 @@
 package com.example.cursomc.domain;
 
+import com.example.cursomc.dto.ProdutoDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -48,6 +49,13 @@ public class Produto implements Serializable {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
+    }
+
+    public Produto(ProdutoDto dto) {
+        super();
+        this.nome = dto.getNome();
+        this.preco = dto.getPreco();
+        this.categorias = dto.getCategorias();
     }
 
     public Produto() {
